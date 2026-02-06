@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Navbar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background-color: #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li {
+      margin-left: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #00ffb3;
+    }
+
+    /* Responsive: Stack menu on small screens */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">MyLogo</a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <script>
+
+  </script>
+
+</body>
+</html>

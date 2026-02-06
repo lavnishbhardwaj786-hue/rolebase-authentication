@@ -1,0 +1,15 @@
+/.vscode
+/DSA.cpp
+/htmland csssproject
+/htmlandcss
+/js_projects
+/node_modules
+/react
+
+# Ignore node_modules everywhere
+node_modules/
+**/node_modules/
+
+# Ignore .env (API keys, passwords)
+.env
+**/.env
