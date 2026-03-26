@@ -12,15 +12,16 @@ const { socketmiddleware } = require('./middleware/socketmiddleware.js');
 const app=express();
 const httpServer=http.createServer(app);
 const io=new Server(httpServer,{
-    cors:({
-    origin: 'http://localhost:5173',
+    cors:{
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-})});
+}
+});
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -71,7 +72,7 @@ res.json({
 // Leader Can Also
 // update any task status
 
-const port=process.env.data||3000;
+const port=process.env.PORT || process.env.data || 3000;
 httpServer.listen(port,()=>{
     console.log(`server is listerning to ${port}`);
 })

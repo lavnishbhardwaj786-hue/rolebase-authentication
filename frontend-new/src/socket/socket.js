@@ -1,10 +1,11 @@
 import { io } from "socket.io-client";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://your-backend-url.onrender.com";
 
 let socket = null;
 
 export const connectSocket = (token, teamId) => {
+    console.log("Connecting to:", BACKEND_URL);
     socket = io(BACKEND_URL, {
         auth: { token },
         query: { teamId }
