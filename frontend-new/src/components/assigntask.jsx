@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/authcontext";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://rolebase-authentication.onrender.com";
+
 const steps = ["title", "description", "assign"];
 
 const Assigntask = () => {
@@ -14,7 +16,7 @@ const Assigntask = () => {
     useEffect(() => {
         const fetchMembers = async () => {
             if (!user.teamId) return;
-            const res = await fetch(`/api/teams/${user.teamId}`, {
+            const res = await fetch(`${BACKEND_URL}/api/teams/${user.teamId}`, {
                 headers: { Authorization: `Bearer ${user.token}` },
             });
             const data = await res.json();
@@ -40,7 +42,7 @@ const Assigntask = () => {
     const handleSubmit = async () => {
         if (!state.to) return;
         setLoading(true);
-        const res = await fetch("/api/task", {
+        const res = await fetch(`${BACKEND_URL}/api/task`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

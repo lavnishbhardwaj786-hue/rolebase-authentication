@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://rolebase-authentication.onrender.com";
+
 const Register = () => {
     const navigate = useNavigate();
     const [registerdata, setregisterdata] = useState({ name: "", email: "", password: "" });
@@ -12,7 +14,7 @@ const Register = () => {
         setError("");
         setLoading(true);
         try {
-            const res  = await fetch("/api/auth/register", {   // fixed: no hardcoded localhost
+            const res  = await fetch(`${BACKEND_URL}/api/auth/register`, {
                 method:  "POST",
                 headers: { "Content-Type": "application/json" },
                 body:    JSON.stringify(registerdata),

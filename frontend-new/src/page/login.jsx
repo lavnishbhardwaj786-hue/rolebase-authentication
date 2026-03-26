@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAuth } from "../context/authcontext";
 import { useNavigate } from "react-router-dom";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://rolebase-authentication.onrender.com";
+
 const Login = () => {
     const [logindata, setlogindata] = useState({ name: "", password: "" });
     const [loading, setLoading]     = useState(false);
@@ -14,7 +16,7 @@ const Login = () => {
         setError("");
         setLoading(true);
         try {
-            const res  = await fetch("/api/auth/login", {
+            const res  = await fetch(`${BACKEND_URL}/api/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(logindata),

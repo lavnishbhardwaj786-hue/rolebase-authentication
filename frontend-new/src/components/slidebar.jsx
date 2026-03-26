@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useAuth } from "../context/authcontext";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://rolebase-authentication.onrender.com";
+
 const roleConfig = {
     leader:   { label: "Leader",    color: "text-orange-400", bg: "bg-orange-400/10 border-orange-400/25" },
     coLeader: { label: "Co-Leader", color: "text-violet-400", bg: "bg-violet-400/10 border-violet-400/25" },
@@ -35,7 +37,7 @@ const Memberlist = () => {
 
     const fetchMembers = async () => {
         if (!user.teamId) return;
-        const res  = await fetch(`/api/teams/${user.teamId}`, {
+        const res  = await fetch(`${BACKEND_URL}/api/teams/${user.teamId}`, {
             headers: { Authorization: `Bearer ${user.token}` },
         });
         const data = await res.json();
@@ -74,7 +76,7 @@ const Memberlist = () => {
     const handleCreateTeam = async () => {
         const teamName = prompt("Enter team name:");
         if (!teamName) return;
-        const res  = await fetch("/api/teams", {
+        const res  = await fetch(`${BACKEND_URL}/api/teams`, {
             method: "POST",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${user.token}` },
             body: JSON.stringify({ name: teamName }),
@@ -87,7 +89,7 @@ const Memberlist = () => {
     const handleAddMember = async () => {
         if (!email) return;
         setAddLoading(true);
-        const res  = await fetch(`/api/teams/${user.teamId}/members`, {
+        const res  = await fetch(`${BACKEND_URL}/api/teams/${user.teamId}/members`, {
             method: "POST",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${user.token}` },
             body: JSON.stringify({ email }),
@@ -100,7 +102,7 @@ const Memberlist = () => {
 
     const handleRemoveMember = async (memberId) => {
         setMenuMemberId(null);
-        const res = await fetch(`/api/teams/${user.teamId}/members/${memberId}`, {
+        const res = await fetch(`${BACKEND_URL}/api/teams/${user.teamId}/members/${memberId}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${user.token}` },
         });
@@ -110,7 +112,7 @@ const Memberlist = () => {
 
     const handleTransferLeader = async (newLeaderId) => {
         setMenuMemberId(null);
-        const res = await fetch(`/api/teams/${user.teamId}/transfer-leader`, {
+        const res = await fetch(`${BACKEND_URL}/api/teams/${user.teamId}/transfer-leader`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${user.token}` },
             body: JSON.stringify({ newLeaderId }),

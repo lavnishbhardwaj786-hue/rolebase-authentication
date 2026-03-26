@@ -3,6 +3,8 @@ import { getSocket } from "../socket/socket";
 import TaskCard from "./taskcard";
 import { useAuth } from "../context/authcontext";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://rolebase-authentication.onrender.com";
+
 const Tasklist = () => {
     const [tasks, setTasks] = useState([]);
     const socket            = getSocket();
@@ -29,7 +31,7 @@ const Tasklist = () => {
     }, [socket]);
 
     const handledelete = async (taskId) => {
-        await fetch(`/api/task/${taskId}`, {
+        await fetch(`${BACKEND_URL}/api/task/${taskId}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${user.token}` },
         });
