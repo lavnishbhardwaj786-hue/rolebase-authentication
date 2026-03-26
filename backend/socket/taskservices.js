@@ -20,12 +20,13 @@
                 return;
             }
 
+            const taskData = await updateTaskStatus(data.taskId, data.status);
+
             // member can only update their OWN task
             if (role === "member" && taskData.assignedTo.toString() !== userId.toString()) {
                 socket.emit("error", { message: "You can only update your own task" });
                 return;
             }
-            const taskData = await updateTaskStatus(data.taskId, data.status);
 
             io.to(teamId).emit("task:statusUpdated", taskData);
         } catch (err) {

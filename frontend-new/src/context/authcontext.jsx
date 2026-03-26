@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { connectSocket, disconnectSocket } from "../socket/socket";
 
 const AuthContext = createContext();
@@ -33,6 +33,12 @@ export const AuthProvider = ({ children }) => {
         disconnectSocket();
         localStorage.clear();
     };
+
+    useEffect(() => {
+        if (user.token && user.teamId) {
+            connectSocket(user.token, user.teamId);
+        }
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>

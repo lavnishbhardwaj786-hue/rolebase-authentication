@@ -38,7 +38,7 @@ const leaderOrCoLeader = async (req, res, next) => {
             members: {
                 $elemMatch: {
                     user: req.user.id,
-                    role: { $in: ["leader", "co-leader"] }
+                    role: { $in: ["leader", "coLeader"] }
                 }
             }
         });
