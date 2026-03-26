@@ -5,17 +5,21 @@ import Login from './page/login';
 import Register from './page/register';
 import Dashboard from './page/dashboard';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Frontpage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Frontpage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+      </Routes>
+      <Analytics />
+    </>
   )
 }
 
